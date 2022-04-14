@@ -1,0 +1,11 @@
+#CharacterCard {
+    justify-self: center;
+    border-style: double;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    align-self: center;
+}
+
+#CharacterCard img {
+    padding: 10px;
+}

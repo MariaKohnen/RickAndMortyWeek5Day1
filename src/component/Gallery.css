@@ -1,0 +1,6 @@
+#gallery {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template: repeat(6, 1fr) / repeat(3, 1fr);
+    align-content: space-evenly;
+}
