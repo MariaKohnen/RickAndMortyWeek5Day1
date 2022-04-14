@@ -9,3 +9,7 @@
 #CharacterCard img {
     padding: 10px;
 }
+
+.characterText {
+    text-align: center;
+}
