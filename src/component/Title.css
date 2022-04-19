@@ -1,16 +1,16 @@
 header {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 5%;
     margin-top: 3%;
 }
 
 header img {
-    height: 80px;
+    height: 70px;
     width: auto;
 }
 
 header h1 {
-    display: inline;
     padding-left: 20px;
 }
