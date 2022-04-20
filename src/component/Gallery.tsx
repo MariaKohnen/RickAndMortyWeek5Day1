@@ -9,7 +9,7 @@ type characterGalleryProps = {
 export default function Gallery({characters}:characterGalleryProps){
     return <div id="gallery">
         {characters.length
-            ? characters.map( obj => <CharacterCard character={obj} />)
+            ? characters.map( obj => <CharacterCard key={obj.id} character={obj} />)
             : <div> Deine Suche ergab kein Ergebnis!</div>
         }
     </div>

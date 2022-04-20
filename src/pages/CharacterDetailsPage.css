@@ -1,0 +1,11 @@
+.containerDetailPage {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+
+
+.containerDetailPage h1 {
+    margin: 0;
+}
