@@ -3,37 +3,33 @@ import './App.css';
 import Title from "./component/Title";
 import Gallery from "./component/Gallery";
 import {Character} from "./model/Character";
+import {fetchCharacters} from "./services/RickAndMortyApiService";
+import ActionBar from "./component/ActionBar";
 
 export default function App() {
 
     const [count, setCount] = useState<string>("");
-    const [text, setText] = useState<string>("");
+    const [searchText, setSearchText] = useState<string>("");
     const [characters, setCharacters] = useState<Character[]>([]);
 
+    useEffect(() => {
+        getCharactersFromApi()
+    }, [])
 
-    const fetchCharacters = () => {
-        return fetch('https://rickandmortyapi.com/api/character')
+    const getCharactersFromApi = () => {
+        fetchCharacters('https://rickandmortyapi.com/api/character')
             .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-                throw new Error("Network error")
+                setCharacters(response.results)
             })
             .catch(console.error)
     }
 
-    useEffect(() => {
-        fetchCharacters()
-            .then(body => setCharacters(body.results))
-    }, [])
-
     const onButtonClick = () => {
-        setCount(text);
+        setCount(searchText);
     }
 
-    const onTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value);
-        setText(event.target.value);
+    const onSearchTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setSearchText(event.target.value);
     }
 
     const filterCharacter = characters.filter(obj => obj.name.toLocaleLowerCase().includes(count.toLocaleLowerCase()));
@@ -41,14 +37,8 @@ export default function App() {
     return (
         <div>
             <Title/>
-            <div><input onChange={onTextChange}/>
-                <button onClick={onButtonClick}>Charackter filtern</button>
-            </div>
-            {filterCharacter.length
-                ? <Gallery characters={filterCharacter}/>
-                : <div>Deine Suche ergab kein Ergebnis
-                    <Gallery characters={characters}/></div>
-            }
+            <ActionBar onSearchTextChange={onSearchTextChange} onButtonClick={onButtonClick} />
+            <Gallery characters={filterCharacter}/>
         </div>
     );
 }

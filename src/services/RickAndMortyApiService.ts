@@ -7,5 +7,4 @@ export const fetchCharacters = (url : string) => {
             }
             throw new Error("Error while loading characters from Rick and Morty API!")
         })
-        .catch(console.error)
 }
