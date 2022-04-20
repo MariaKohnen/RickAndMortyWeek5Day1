@@ -1,45 +1,23 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import GalleryPage from "./pages/GalleryPage";
 import Title from "./component/Title";
-import Gallery from "./component/Gallery";
-import {Character} from "./model/Character";
-import {fetchCharacters} from "./services/RickAndMortyApiService";
-import ActionBar from "./component/ActionBar";
+import Homepage from "./pages/Homepage";
+import Impressum from "./pages/Impressum";
 
 export default function App() {
 
-    const [count, setCount] = useState<string>("");
-    const [searchText, setSearchText] = useState<string>("");
-    const [characters, setCharacters] = useState<Character[]>([]);
-
-    useEffect(() => {
-        getCharactersFromApi()
-    }, [])
-
-    const getCharactersFromApi = () => {
-        fetchCharacters('https://rickandmortyapi.com/api/character')
-            .then(response => {
-                setCharacters(response.results)
-            })
-            .catch(console.error)
-    }
-
-    const onButtonClick = () => {
-        setCount(searchText);
-    }
-
-    const onSearchTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setSearchText(event.target.value);
-    }
-
-    const filterCharacter = characters.filter(obj => obj.name.toLocaleLowerCase().includes(count.toLocaleLowerCase()));
-
     return (
-        <div>
+        <BrowserRouter>
             <Title/>
-            <ActionBar onSearchTextChange={onSearchTextChange} onButtonClick={onButtonClick} />
-            <Gallery characters={filterCharacter}/>
-        </div>
-    );
+            <Routes>
+                <Route path={"/"} element={<Homepage />}/>
+                <Route path={"/gallery"} element={<GalleryPage />}/>
+                <Route path={"/impressum"} element={<Impressum />}/>
+            </Routes>
+        </BrowserRouter>
+    )
+
 }
 

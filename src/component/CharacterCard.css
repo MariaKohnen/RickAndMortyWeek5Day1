@@ -1,5 +1,5 @@
 #CharacterCard {
-    border-style: double;
+    border: 1px solid #807e7e;
     border-radius: 20px;
     box-shadow: 5px 5px 5px 5px grey;
     margin: 1.5%;
