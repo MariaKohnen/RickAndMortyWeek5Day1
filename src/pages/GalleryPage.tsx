@@ -1,7 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {Character} from "../model/Character";
 import {fetchCharacters} from "../services/RickAndMortyApiService";
-import Title from "../component/Title";
 import ActionBar from "../component/ActionBar";
 import Gallery from "../component/Gallery";
 

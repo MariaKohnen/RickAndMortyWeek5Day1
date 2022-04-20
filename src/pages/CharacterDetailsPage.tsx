@@ -28,12 +28,16 @@ export default function CharacterDetailsPage() {
     return (
         <div className="containerDetailPage">
             <div><img src={currentCharacter.image} alt={"Picture of " + currentCharacter.name}/></div>
-            <div><h1> {currentCharacter.name}</h1>
-                <p>{currentCharacter.species}</p>
-                <p>{currentCharacter.status}</p>
-                <p>{currentCharacter.gender}</p>
-                <p>{currentCharacter.location.name}</p>
+            <div><h1>{currentCharacter.name}</h1>
             </div>
         </div>
     )
 }
+
+/* useEffect () => {
+axios.get(`https://rickandmortyapi.com/api/character`)
+.then(response => response.date)
+.then(body => setCharacters(body.results))
+.catch(console.error)
+}, [])
+ */
