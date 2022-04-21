@@ -4,8 +4,29 @@
     gap: 50px;
 }
 
+.detailPage {
+    text-align: center;
+}
 
+.containerDetailPage p {
+    text-align: left;
+}
 
-.containerDetailPage h1 {
-    margin: 0;
+.details {
+    display: grid;
+    grid-template: repeat(5, 2rem) / 1fr 1fr;
+}
+
+.details p:nth-child(even) {
+    grid-column: 2;
+}
+
+.details p:nth-child(odd) {
+    grid-column: 1;
+    font-weight: bold;
+}
+
+.details button {
+    grid-column: 2 span;
+    grid-row: 5;
 }

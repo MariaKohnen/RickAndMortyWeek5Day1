@@ -1,12 +1,11 @@
 import {Character} from "../model/Character";
 import "./CharacterCard.css"
-import React, {useState} from "react";
+import React, {MouseEventHandler, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 type CharacterProps = {
     character: Character;
 }
-
 
 export default function CharacterCard({character}: CharacterProps) {
 
@@ -17,7 +16,8 @@ export default function CharacterCard({character}: CharacterProps) {
         navi(`/character/${character.id}`);
     }
 
-    const onButtonClick = () => {
+    const onButtonClick : MouseEventHandler<HTMLButtonElement> = (event) => {
+        event.stopPropagation();
         setCount(count + 1);
     }
 
@@ -28,7 +28,5 @@ export default function CharacterCard({character}: CharacterProps) {
         <div>
             <button onClick={onButtonClick}>{count} likes</button>
         </div>
-
-
     </div>
 }

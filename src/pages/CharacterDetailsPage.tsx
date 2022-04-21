@@ -1,43 +1,46 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {Character} from "../model/Character";
 import "./CharacterDetailsPage.css"
 
-export default function CharacterDetailsPage() {
+type CharacterGalleryProps = {
+    characters: Character[]
+}
 
-    const [currentCharacter, setCurrentCharacter] = useState<Character>(Object);
+export default function CharacterDetailsPage({characters}: CharacterGalleryProps) {
+
+    const navigate = useNavigate();
     const param = useParams();
     const id = param.id
 
-    useEffect(() => {
-        fetchSingleCharacter()
-            .then(body => setCurrentCharacter(body))
-    }, [])
+    if (id === undefined) {
+        navigate("/gallery")
+        return (<div></div>)
+    }
 
-    const fetchSingleCharacter = () => {
-        return fetch(`https://rickandmortyapi.com/api/character/${id}`)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-                throw new Error("Error while loading characters from Rick and Morty API!")
-            })
-            .catch(console.error)
+    const character = characters.find(obj => obj.id.toString() === id)
+
+    if (character === undefined) {
+        return (<div></div>)
+    }
+
+    const onButtonClick = () => {
+        navigate("/gallery")
     }
 
     return (
-        <div className="containerDetailPage">
-            <div><img src={currentCharacter.image} alt={"Picture of " + currentCharacter.name}/></div>
-            <div><h1>{currentCharacter.name}</h1>
+        <div className="detailPage"><h1>{character.name}</h1>
+            <div className="containerDetailPage">
+                <img src={character.image} alt={"Picture of " + character.name}/>
+                <div className="details"><p>Status:</p><p> {character.status}</p>
+                    <p>Species:</p><p> {character.species}</p>
+                    <p>Gender: </p><p>{character.gender}</p>
+                    <p>Location: </p><p>{character.location.name}</p>
+                    <button onClick={onButtonClick}>Back to Gallery</button>
+                </div>
             </div>
+
         </div>
     )
 }
 
-/* useEffect () => {
-axios.get(`https://rickandmortyapi.com/api/character`)
-.then(response => response.date)
-.then(body => setCharacters(body.results))
-.catch(console.error)
-}, [])
- */
